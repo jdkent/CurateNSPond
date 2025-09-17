@@ -1,0 +1,19 @@
+interactions:
+- request:
+    method: GET
+    uri: https://api.semanticscholar.org/graph/v1/paper/1?fields=title,abstract,authors,venue,journal,year
+    body:
+      string: ''
+    headers:
+      accept:
+      - '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+    body:
+      string: '{"paperId":"1","title":"VCR Sample Title","abstract":"Example abstract.","authors":[{"name":"Author One"}],"journal":"Sample Journal","venue":"Sample Journal","year":2024}'
+version: 1

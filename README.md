@@ -22,3 +22,11 @@ Use test driven development to build out each utility one at a time.
 ## Implementation
 
 I want this to be implemented in python, using best data science practices, with type hints, docstrings, and unit tests. Use uv for project management, black for formatting, and isort for import sorting, and pytest for testing.
+
+### Optional dependencies
+
+The full-text fetching utility requires the `fulltext` extra, which installs [`pubget`](https://pypi.org/project/pubget/) and [`ACE`](https://github.com/neurosynth/ACE). Install with:
+
+```
+uv pip install ".[fulltext]"
+```

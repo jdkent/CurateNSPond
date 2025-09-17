@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.env
+.venv
+.mypy_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+.vscode/
+.idea/
+.DS_Store
+src/curate_ns_pond/_version.py

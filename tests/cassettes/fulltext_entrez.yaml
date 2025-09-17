@@ -1,0 +1,36 @@
+interactions:
+- request:
+    method: GET
+    uri: https://api.semanticscholar.org/graph/v1/paper/2?fields=title,abstract,authors,venue,journal,year
+    body:
+      string: ''
+    headers:
+      accept:
+      - '*/*'
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+    body:
+      string: ''
+- request:
+    method: GET
+    uri: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=2&retmode=json&tool=CurateNSPond
+    body:
+      string: ''
+    headers:
+      accept:
+      - '*/*'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json; charset=utf-8
+    body:
+      string: '{"result":{"uids":["2"],"2":{"title":"Entrez Example Title","elocationid":"Entrez Abstract","authors":[{"name":"Author Alpha"}],"fulljournalname":"Entrez Journal","pubdate":"2020 Jan"}}}'
+version: 1
