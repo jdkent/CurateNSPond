@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import re
 from typing import Iterable
 
 import httpx
@@ -76,13 +77,27 @@ class EntrezSummaryClient:
                 value = item.get("value")
                 if not value:
                     continue
-                if idtype == "pmcid":
-                    record["pmcid"] = str(value)
+                if idtype in {"pmcid", "pmc"}:
+                    normalized = self._normalize_pmcid(str(value))
+                    if normalized:
+                        record["pmcid"] = normalized
                 elif idtype == "doi":
                     record["doi"] = str(value)
             if record:
                 summaries[pmid] = record
         return summaries
+
+    @staticmethod
+    def _normalize_pmcid(value: str) -> str | None:
+        candidate = value.strip()
+        if not candidate:
+            return None
+        match = re.search(r"PMC\d+", candidate.upper())
+        if match:
+            return match.group(0)
+        if candidate.upper().startswith("PMC"):
+            return candidate.upper()
+        return None
 
     def fetch_metadata(self, pmid: str) -> dict[str, object] | None:
         summaries = self._fetch_summary([pmid])

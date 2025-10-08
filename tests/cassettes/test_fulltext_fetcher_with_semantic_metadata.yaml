@@ -1,0 +1,142 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - api.semanticscholar.org
+    method: GET
+    uri: https://api.semanticscholar.org/graph/v1/paper/32256646?fields=title%2Cabstract%2Cauthors%2Cvenue%2Cjournal%2Cyear
+  response:
+    body:
+      string: '{"error":"Paper with id 32256646 not found"}
+
+        '
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '45'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 18 Sep 2025 18:39:09 GMT
+      Via:
+      - 1.1 848ee9f48eafd6caa6bf5371a2f79f28.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - nOG-whB6a3WAeFE7q45sArrKdOnHvYfiCz9osTyIi12gXa-Zs6BvKg==
+      X-Amz-Cf-Pop:
+      - DFW57-P1
+      X-Cache:
+      - Error from cloudfront
+      x-amz-apigw-id:
+      - RHG4LFUyPHcEYNQ=
+      x-amzn-Remapped-Connection:
+      - keep-alive
+      x-amzn-Remapped-Content-Length:
+      - '45'
+      x-amzn-Remapped-Date:
+      - Thu, 18 Sep 2025 18:39:09 GMT
+      x-amzn-Remapped-Server:
+      - gunicorn
+      x-amzn-RequestId:
+      - b05cd1aa-30f6-4dc5-9c20-7e67c53dceef
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - api.semanticscholar.org
+    method: GET
+    uri: https://api.semanticscholar.org/graph/v1/paper/10.1155%2F2020%2F4598217?fields=title%2Cabstract%2Cauthors%2Cvenue%2Cjournal%2Cyear
+  response:
+    body:
+      string: '{"paperId": "6b887ed1ca6b40c5c4a1da8774f19bccbfb8321a", "title": "A
+        Prospective Clinical Study of a Prosexual Nutrient: Nano Leo for Evaluation
+        of Libido, Erection, and Orgasm in Indian Men with Erectile Dysfunction",
+        "venue": "Evidence-Based Complementary and Alternative Medicine", "year":
+        2020, "openAccessPdf": {"url": "https://downloads.hindawi.com/journals/ecam/2020/4598217.pdf",
+        "status": "HYBRID", "license": "CCBY", "disclaimer": "Notice: Paper or abstract
+        available at https://pmc.ncbi.nlm.nih.gov/articles/PMC7086438, which is subject
+        to the license by the author or copyright owner provided with this content.
+        Please go to the source to verify the license and copyright information for
+        your use."}, "journal": {"name": "Evidence-based Complementary and Alternative
+        Medicine : eCAM", "volume": "2020"}, "authors": [{"authorId": "50461996",
+        "name": "S. N. Shankhwar"}, {"authorId": "3758238", "name": "A. Mahdi"}, {"authorId":
+        "2157820373", "name": "A. V. Sharma"}, {"authorId": "1453939285", "name":
+        "Kishan Pv"}], "abstract": "Aim The present study aimed to assess the effects
+        of Nano Leo, a prosexual nutrient formulation, on libido, erection, and orgasm
+        in patients with erectile dysfunction (ED). Methods This was a prospective,
+        single-center, phase IV efficacy study. Patients received two capsules for
+        7 days and thereafter one capsule through 90 days. Main outcome measures:
+        primary endpoint was change in erectile function assessed using the International
+        Index of Erectile Function (IIEF) questionnaire. Secondary endpoints included
+        improvement in testosterone levels, FSH, LH, and prolactin levels; seminal
+        parameters; and overall quality of life (QoL). Results Our study included
+        99 men (mean age 32.2\u2009\u00b1\u20094.71 years). Mean erectile function
+        domain score increased from 18.9\u2009\u00b1\u20095.67 at baseline to 23.7\u2009\u00b1\u20094.01
+        on day 90 (P < 0.001). Similar improvements were observed in orgasmic function,
+        sexual desire, intercourse satisfaction, and overall satisfaction domains
+        of IIEF score which was seen as early as day 30. Improved IIEF corroborated
+        with improvement in all QoL domains. From baseline to day 90, treatment with
+        Nano Leo increased testosterone levels (5.04\u2009\u00b1\u20092.22 vs. 5.57\u2009\u00b1\u20091.53\u2009ng/mL,
+        P < 0.001). Similar improvements were observed in orgasmic function, sexual
+        desire, intercourse satisfaction, and overall satisfaction domains of IIEF
+        score which was seen as early as day 30. Improved IIEF corroborated with improvement
+        in all QoL domains. From baseline to day 90, treatment with Nano Leo increased
+        testosterone levels (5.04\u2009\u00b1\u20092.22 vs. 5.57\u2009\u00b1\u20091.53\u2009ng/mL,
+        Conclusion Nano Leo showed improved libido, erection, and orgasm as evaluated
+        by IIEF and QoL and was well tolerated. Therefore, Nano Leo could be an effective
+        and safe pronutrient supplement in managing ED."}
+
+        '
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '2908'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 18 Sep 2025 18:39:09 GMT
+      Via:
+      - 1.1 848ee9f48eafd6caa6bf5371a2f79f28.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - qluOYDnDNYKXdNWRxPgO5v_D7RKG4cxZSh9kjl0uxGkpHA8IElpMeA==
+      X-Amz-Cf-Pop:
+      - DFW57-P1
+      X-Cache:
+      - Miss from cloudfront
+      x-amz-apigw-id:
+      - RHG4NG_YPHcES8w=
+      x-amzn-Remapped-Connection:
+      - keep-alive
+      x-amzn-Remapped-Content-Length:
+      - '2908'
+      x-amzn-Remapped-Date:
+      - Thu, 18 Sep 2025 18:39:09 GMT
+      x-amzn-Remapped-Server:
+      - gunicorn
+      x-amzn-RequestId:
+      - 54a72cab-4ae8-48eb-8afd-8ce52ee92097
+    status:
+      code: 200
+      message: OK
+version: 1

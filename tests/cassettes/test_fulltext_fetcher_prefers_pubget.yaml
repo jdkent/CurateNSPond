@@ -1,0 +1,176 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - api.semanticscholar.org
+    method: GET
+    uri: https://api.semanticscholar.org/graph/v1/paper/32256646?fields=title%2Cabstract%2Cauthors%2Cvenue%2Cjournal%2Cyear
+  response:
+    body:
+      string: '{"error":"Paper with id 32256646 not found"}
+
+        '
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '45'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 18 Sep 2025 19:16:51 GMT
+      Via:
+      - 1.1 de5b26aba33b480d2b740b96a34fe916.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - QvdAMtu7Ddofu_6p1JCorKYesXyddT9nWlCkLydNgUsmBU9huz_ruQ==
+      X-Amz-Cf-Pop:
+      - DFW57-P1
+      X-Cache:
+      - Error from cloudfront
+      x-amz-apigw-id:
+      - RHMZlGoRPHcEM4A=
+      x-amzn-Remapped-Connection:
+      - keep-alive
+      x-amzn-Remapped-Content-Length:
+      - '45'
+      x-amzn-Remapped-Date:
+      - Thu, 18 Sep 2025 19:16:51 GMT
+      x-amzn-Remapped-Server:
+      - gunicorn
+      x-amzn-RequestId:
+      - 41a2de92-e6c9-4842-be3b-382c74b0ca12
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - api.semanticscholar.org
+    method: GET
+    uri: https://api.semanticscholar.org/graph/v1/paper/10.1155%2F2020%2F4598217?fields=title%2Cabstract%2Cauthors%2Cvenue%2Cjournal%2Cyear
+  response:
+    body:
+      string: '{"message": "Too Many Requests. Please wait and try again or apply
+        for a key for higher rate limits. https://www.semanticscholar.org/product/api#api-key-form",
+        "code": "429"}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '174'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 18 Sep 2025 19:16:51 GMT
+      Via:
+      - 1.1 de5b26aba33b480d2b740b96a34fe916.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - fLfhHt_HmUUEYk2stNhIbFF1zuEN8A0M2QX2yhNtwP7fp1jK7MPZ7g==
+      X-Amz-Cf-Pop:
+      - DFW57-P1
+      X-Cache:
+      - Error from cloudfront
+      x-amz-apigw-id:
+      - RHMZoF5hPHcENAA=
+      x-amzn-ErrorType:
+      - TooManyRequestsException
+      x-amzn-RequestId:
+      - 901f9862-a376-45e6-8e0e-68ad8d35ed86
+    status:
+      code: 429
+      message: ''
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - eutils.ncbi.nlm.nih.gov
+    method: GET
+    uri: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=32256646&retmode=json&tool=CurateNSPond
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAJSUyW7bMBCGX2XAsxOT8hr35KYBusSpgQBFgSAHWqQjohTpcnHqGn33DiXZkrMA
+        ycnWcL6Zn7NwTwrJhXRktidht5FkRqSPZcndjvTIVjqvrEEjPR+Qfz3i8FCH5ByV8GR2RwZZNhqP
+        h2Ny32v/1+eIHS09sokrwUNKkNGMokGeWmDBHTCGB95Glyfz1VYJ+Mi9FHBpy42WpTQB5jpIZ3iA
+        hRTozWMorEta9sTwMnG3BTe/ikeMd3vTeDR3m1fOaMt19BimEokXO6ILXggF8/k7MczoSg7zH+/k
+        llv49iYEq6u5D/VlWzCooCsKls76jcyD2kq41MqonGu4DVHswK6BV+fyT0TjTQxOYSFncMONhWtp
+        YW0dXG25jjxguxNwrVZK2B5cuRTTmh5wI+C7e+C+BGXgixGKG2yBgUcVisZPS/i08+toKua86qUL
+        B5GbjsT8ING3EjdHiaaRCCYp1I1CeaJQVwpBNgIrffaoT9X6yoM+edAnWn1pwK2OZWcmlfcxfaZ5
+        5Q8Sp4oMRxfTjE1IaoB5SCMv8Qf7YXQZjfodZdUiRlnGRjRjdZS0M2wyZGfDbPIzDfuJaTqtF6Lu
+        +R35ihNv8N5zF1SOtbpPm5ZbJ7DjISYVy7iqxx2pozEbpTi8hup93BMlmklCz7JCagumZ3hhLKHs
+        LmYaxhYp867/tPVfLi4ndDoeDqbPCHWSY9QyeHamxAxa9sMpLKzqooMWZfScsdGon9rSP3QgLUGh
+        fLD4NqWbdkuB5ZI4V0nK8U1hF31G+4wBpTNKq9SnyFb5UwKTUYbQKwTPc7kJLyHZ4BUEh9jJv0+B
+        YZ9OgY5fAo5deyuA3rhL8lWCPU+BfXFSS3xYn1KDTrmqIVzj4pg8LcIdfvOAe7mKofomn7mHOYZ1
+        PA9pZDEuArmN/wEAAP//bFVBEoIwDLz7CsazXrzJzfHsI9pMGaqFOpVy4+9umiCC3jqhJNl0s9vD
+        IU7nw77JIdyF2qp3rOic72iLqtNH1eE3ZYONijtrBJB5ArSqrtz1cuMtCpGKAJSVA33q6i9TgCqS
+        koz8YHTbX4ko9gwhgEYCycb4mAUKV7hm7uSM4yDuJ3uHn1qX5hY2YQUoVXSme57gEwrY586yx3LE
+        jMYHY4NrUuxyChKds+KL0xAg/HSL2JKbW1/KUmvATS3Csru219XbyoXGpy9H2ZjmyJAoB1YXnc40
+        Tbs3AAAA//8DACRyD80wCAAA
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - X-RateLimit-Limit,X-RateLimit-Remaining
+      Cache-Control:
+      - private
+      Connection:
+      - Keep-Alive
+      Content-Security-Policy:
+      - upgrade-insecure-requests
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 18 Sep 2025 19:16:51 GMT
+      Keep-Alive:
+      - timeout=4, max=40
+      NCBI-PHID:
+      - 1D32FDAE065976D500003B60F26440AC.1.1.m_1
+      NCBI-SID:
+      - F7C66513C5597585_10DFSID
+      Referrer-Policy:
+      - origin-when-cross-origin
+      Server:
+      - Finatra
+      Set-Cookie:
+      - ncbi_sid=F7C66513C5597585_10DFSID; domain=.nih.gov; path=/; expires=Fri, 18
+        Sep 2026 19:16:52 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-RateLimit-Limit:
+      - '3'
+      X-RateLimit-Remaining:
+      - '2'
+      X-UA-Compatible:
+      - IE=Edge
+      X-XSS-Protection:
+      - 1; mode=block
+      content-encoding:
+      - gzip
+    status:
+      code: 200
+      message: OK
+version: 1

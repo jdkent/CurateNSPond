@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import json
 from typing import Iterable
+from urllib.parse import urlencode
+from urllib.request import urlopen
 
 import httpx
 
@@ -40,16 +43,7 @@ class PMCIdConverter:
         }
         if self.email:
             params["email"] = self.email
-        try:
-            response = self._client.get(self.BASE_URL, params=params)
-        except httpx.HTTPError as exc:  # pragma: no cover - network failure
-            raise PMCError("pmc: request failed") from exc
-        if response.status_code >= 400:
-            raise PMCError(f"pmc: error {response.status_code}")
-        try:
-            payload = response.json()
-        except ValueError as exc:  # pragma: no cover - defensive
-            raise PMCError("pmc: invalid JSON response") from exc
+        payload = self._fetch_payload(params)
         records = payload.get("records", [])
         if not isinstance(records, list):
             return {}
@@ -67,3 +61,25 @@ class PMCIdConverter:
                 entry["doi"] = str(record["doi"])
             result[str(pmcid)] = entry
         return result
+
+    def _fetch_payload(self, params: dict[str, str]) -> dict[str, object]:
+        try:
+            response = self._client.get(self.BASE_URL, params=params, follow_redirects=True)
+        except httpx.HTTPError as exc:  # pragma: no cover - network failure
+            raise PMCError("pmc: request failed") from exc
+        if response.status_code == 403:
+            return self._fetch_with_urllib(params)
+        if response.status_code >= 400:
+            raise PMCError(f"pmc: error {response.status_code}")
+        try:
+            return response.json()
+        except ValueError:
+            return self._fetch_with_urllib(params)
+
+    def _fetch_with_urllib(self, params: dict[str, str]) -> dict[str, object]:
+        url = f"{self.BASE_URL}?{urlencode(params)}"
+        try:
+            with urlopen(url, timeout=self.timeout) as response:  # type: ignore[call-arg]
+                return json.load(response)
+        except Exception as exc:  # pragma: no cover - defensive
+            raise PMCError("pmc: invalid JSON response") from exc

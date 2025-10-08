@@ -23,61 +23,34 @@ def _write_jsonl(path: Path, records: list[dict[str, str | None]]) -> None:
             handle.write("\n")
 
 
-class StubPubget:
-    def __init__(self) -> None:
-        self.calls: list[str] = []
-
-    def fetch_text(self, pmcid: str) -> str | None:
-        self.calls.append(pmcid)
-        return "stub pubget text" if pmcid == "PMC1" else None
-
-
-class StubAce:
-    def __init__(self) -> None:
-        self.calls: list[str] = []
-
-    def fetch_text(self, pmid: str) -> str | None:
-        self.calls.append(pmid)
-        return "stub ace text"
-
-
-class StubSemantic:
-    def __init__(self) -> None:
-        self.calls: list[str] = []
-
-    def fetch_metadata(self, identifier: str) -> dict[str, object] | None:
-        self.calls.append(identifier)
-        if identifier == "1":
-            return {
-                "title": "Stub Title",
-                "abstract": "Stub Abstract",
-                "authors": ["Test Author"],
-                "journal": "Stub Journal",
-                "year": 2024,
-            }
-        return None
-
-
-class StubEntrez:
-    def __init__(self) -> None:
-        self.calls: list[str] = []
-
-    def fetch_metadata(self, pmid: str) -> dict[str, object] | None:
-        self.calls.append(pmid)
-        return None
-
-
+@pytest.mark.vcr
 def test_cli_fetch_fulltext(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     monkeypatch.setenv("CURATE_DATA_ROOT", str(tmp_path))
     monkeypatch.setattr("curate_ns_pond.cli.datetime", _FixedDatetime)
 
-    monkeypatch.setattr("curate_ns_pond.fulltext.PubGetClient", StubPubget)
-    monkeypatch.setattr("curate_ns_pond.fulltext.ACEClient", StubAce)
-    monkeypatch.setattr("curate_ns_pond.fulltext.SemanticScholarClient", StubSemantic)
-    monkeypatch.setattr("curate_ns_pond.fulltext.EntrezSummaryClient", StubEntrez)
+    # PubGet requires an external CLI; return deterministic text to keep the test hermetic.
+    monkeypatch.setattr(
+        "curate_ns_pond.fulltext.PubGetClient.fetch_text",
+        lambda self, pmcid: "pubget text" if pmcid == "PMC7086438" else None,
+    )
+
+    # ACE should not be needed when PubGet succeeds, but guard against network calls.
+    monkeypatch.setattr(
+        "curate_ns_pond.fulltext.ACEClient.fetch_text",
+        lambda self, pmid: None,
+    )
 
     input_file = tmp_path / "records.jsonl"
-    _write_jsonl(input_file, [{"pmid": "1", "pmcid": "PMC1", "doi": "10.1/abc"}])
+    _write_jsonl(
+        input_file,
+        [
+            {
+                "pmid": "32256646",
+                "pmcid": "PMC7086438",
+                "doi": "10.1155/2020/4598217",
+            }
+        ],
+    )
 
     runner = CliRunner()
     result = runner.invoke(app, ["fetch", "fulltext", str(input_file)])

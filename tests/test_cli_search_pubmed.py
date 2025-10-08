@@ -4,9 +4,7 @@ import json
 from datetime import datetime
 from pathlib import Path
 
-import httpx
 import pytest
-import respx
 from typer.testing import CliRunner
 
 from curate_ns_pond.cli import app
@@ -19,32 +17,26 @@ class _FixedDatetime(datetime):
         return cls(2024, 1, 15, 12, 0, 0)
 
 
-@respx.mock
+@pytest.mark.vcr
 def test_search_pubmed_writes_pmids(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     monkeypatch.setenv("CURATE_DATA_ROOT", str(tmp_path))
     monkeypatch.setattr("curate_ns_pond.cli.datetime", _FixedDatetime)
 
-    search_route = respx.get("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi")
-
-    def _handler(request: httpx.Request) -> httpx.Response:
-        assert request.url.params["term"] == "neuroimaging"
-        assert request.url.params["retstart"] == "0"
-        payload = {
-            "esearchresult": {
-                "count": "2",
-                "idlist": ["12345", "67890"],
-            }
-        }
-        return httpx.Response(200, json=payload)
-
-    search_route.mock(side_effect=_handler)
-
     runner = CliRunner()
-    result = runner.invoke(app, ["search", "pubmed", "neuroimaging"])
+    result = runner.invoke(
+        app,
+        [
+            "search",
+            "pubmed",
+            "31452104[pmid] OR 31722068[pmid]",
+            "--retmax",
+            "1",
+        ],
+    )
 
     assert result.exit_code == 0, result.stdout
 
-    search_hash = hash_identifiers(["neuroimaging"])
+    search_hash = hash_identifiers(["31452104[pmid] OR 31722068[pmid]"])
     run_dir = tmp_path / "raw" / "pubmed" / search_hash / "20240115"
 
     pmid_file = run_dir / "pmids.txt"
@@ -53,9 +45,10 @@ def test_search_pubmed_writes_pmids(monkeypatch: pytest.MonkeyPatch, tmp_path: P
     assert pmid_file.exists()
     assert metadata_file.exists()
 
-    assert pmid_file.read_text().splitlines() == ["12345", "67890"]
+    pmids = pmid_file.read_text().splitlines()
+    assert set(pmids) == {"31452104", "31722068"}
 
     metadata = json.loads(metadata_file.read_text())
-    assert metadata["query"] == "neuroimaging"
+    assert metadata["query"] == "31452104[pmid] OR 31722068[pmid]"
     assert metadata["result_count"] == 2
     assert metadata["run_started_at"].startswith("2024-01-15")

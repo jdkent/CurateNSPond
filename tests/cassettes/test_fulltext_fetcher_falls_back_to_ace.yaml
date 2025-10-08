@@ -1,0 +1,109 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - api.semanticscholar.org
+    method: GET
+    uri: https://api.semanticscholar.org/graph/v1/paper/31452104?fields=title%2Cabstract%2Cauthors%2Cvenue%2Cjournal%2Cyear
+  response:
+    body:
+      string: '{"message": "Too Many Requests. Please wait and try again or apply
+        for a key for higher rate limits. https://www.semanticscholar.org/product/api#api-key-form",
+        "code": "429"}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '174'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 18 Sep 2025 19:16:52 GMT
+      Via:
+      - 1.1 2918cacbb3dda2d143059f9b5f341e32.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - tf32do2xUQ7K5IFIH3vOvOmzA8C1nEcI3TE0XjDH5zamLf0L9PPkew==
+      X-Amz-Cf-Pop:
+      - DFW57-P1
+      X-Cache:
+      - Error from cloudfront
+      x-amz-apigw-id:
+      - RHMZxFqSvHcERTw=
+      x-amzn-ErrorType:
+      - TooManyRequestsException
+      x-amzn-RequestId:
+      - 58f5102f-1e28-4ac8-b1c5-d2881d30ed58
+    status:
+      code: 429
+      message: ''
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - api.semanticscholar.org
+    method: GET
+    uri: https://api.semanticscholar.org/graph/v1/paper/10.1007%2F978-1-4939-9752-7_10?fields=title%2Cabstract%2Cauthors%2Cvenue%2Cjournal%2Cyear
+  response:
+    body:
+      string: '{"paperId": "4cadc2cc21746a9b5827db3338ac4fd15d02c290", "title": "Molegro
+        Virtual Docker for Docking.", "venue": "Methods in molecular biology", "year":
+        2019, "openAccessPdf": {"url": "", "status": null, "license": null, "disclaimer":
+        "Notice: The following paper fields have been elided by the publisher: {''abstract''}.
+        Paper or abstract available at https://api.unpaywall.org/v2/10.1007/978-1-4939-9752-7_10?email=<INSERT_YOUR_EMAIL>
+        or https://doi.org/10.1007/978-1-4939-9752-7_10, which is subject to the license
+        by the author or copyright owner provided with this content. Please go to
+        the source to verify the license and copyright information for your use."},
+        "journal": {"name": "Methods in molecular biology", "pages": "\n          149-167\n        ",
+        "volume": "2053"}, "authors": [{"authorId": "1411741477", "name": "Gabriela
+        Bitencourt-Ferreira"}, {"authorId": "7425291", "name": "W. F. de Azevedo"}],
+        "abstract": null}
+
+        '
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '931'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 18 Sep 2025 19:16:52 GMT
+      Via:
+      - 1.1 2918cacbb3dda2d143059f9b5f341e32.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - 2IHuLXwcDhulSimtOYBzGn__XmIEue_hEbsA-AByToVc9aBRnD6Hvg==
+      X-Amz-Cf-Pop:
+      - DFW57-P1
+      X-Cache:
+      - Miss from cloudfront
+      x-amz-apigw-id:
+      - RHMZ1HV8vHcEClg=
+      x-amzn-Remapped-Connection:
+      - keep-alive
+      x-amzn-Remapped-Content-Length:
+      - '931'
+      x-amzn-Remapped-Date:
+      - Thu, 18 Sep 2025 19:16:52 GMT
+      x-amzn-Remapped-Server:
+      - gunicorn
+      x-amzn-RequestId:
+      - d44dac4f-0135-4fc5-ae6a-34b6efd140d7
+    status:
+      code: 200
+      message: OK
+version: 1

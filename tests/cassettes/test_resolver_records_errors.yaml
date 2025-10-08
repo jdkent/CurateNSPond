@@ -1,0 +1,95 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - httpbin.org
+    method: GET
+    uri: https://httpbin.org/status/500
+  response:
+    body:
+      string: "<html>\r\n<head><title>503 Service Temporarily Unavailable</title></head>\r\n<body>\r\n<center><h1>503
+        Service Temporarily Unavailable</h1></center>\r\n</body>\r\n</html>\r\n"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '162'
+      Content-Type:
+      - text/html
+      Date:
+      - Thu, 18 Sep 2025 18:49:46 GMT
+      Server:
+      - awselb/2.0
+    status:
+      code: 503
+      message: Service Temporarily Unavailable
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - httpbin.org
+    method: GET
+    uri: https://httpbin.org/status/500
+  response:
+    body:
+      string: "<html>\r\n<head><title>503 Service Temporarily Unavailable</title></head>\r\n<body>\r\n<center><h1>503
+        Service Temporarily Unavailable</h1></center>\r\n</body>\r\n</html>\r\n"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '162'
+      Content-Type:
+      - text/html
+      Date:
+      - Thu, 18 Sep 2025 18:49:46 GMT
+      Server:
+      - awselb/2.0
+    status:
+      code: 503
+      message: Service Temporarily Unavailable
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - httpbin.org
+    method: GET
+    uri: https://httpbin.org/status/500
+  response:
+    body:
+      string: "<html>\r\n<head><title>503 Service Temporarily Unavailable</title></head>\r\n<body>\r\n<center><h1>503
+        Service Temporarily Unavailable</h1></center>\r\n</body>\r\n</html>\r\n"
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '162'
+      Content-Type:
+      - text/html
+      Date:
+      - Thu, 18 Sep 2025 18:49:46 GMT
+      Server:
+      - awselb/2.0
+    status:
+      code: 503
+      message: Service Temporarily Unavailable
+version: 1

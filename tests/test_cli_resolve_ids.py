@@ -4,9 +4,7 @@ import json
 from datetime import datetime
 from pathlib import Path
 
-import httpx
 import pytest
-import respx
 from typer.testing import CliRunner
 
 from curate_ns_pond.cli import app
@@ -20,65 +18,13 @@ class _FixedDatetime(datetime):
         return cls(2024, 1, 15, 12, 0, 0)
 
 
-@respx.mock
+@pytest.mark.vcr
 def test_cli_resolve_ids_writes_outputs(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     monkeypatch.setenv("CURATE_DATA_ROOT", str(tmp_path))
     monkeypatch.setattr("curate_ns_pond.cli.datetime", _FixedDatetime)
 
     input_path = tmp_path / "ids.txt"
-    input_path.write_text("123456\nPMC123456\n")
-
-    respx.get("https://www.ncbi.nlm.nih.gov/pmc/utils/idconv/v1.0/").mock(
-        return_value=httpx.Response(
-            200,
-            json={
-                "records": [
-                    {"pmcid": "PMC123456", "pmid": "123456", "doi": "10.1000/xyz"}
-                ]
-            },
-        )
-    )
-    respx.get("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi").mock(
-        return_value=httpx.Response(
-            200,
-            json={
-                "result": {
-                    "uids": ["123456"],
-                    "123456": {
-                        "articleids": [
-                            {"idtype": "pmid", "value": "123456"},
-                            {"idtype": "pmcid", "value": "PMC123456"},
-                            {"idtype": "doi", "value": "10.1000/xyz"},
-                        ]
-                    },
-                }
-            },
-        )
-    )
-    respx.get("https://api.semanticscholar.org/graph/v1/paper/123456").mock(
-        return_value=httpx.Response(
-            200,
-            json={
-                "externalIds": {
-                    "PMID": "123456",
-                    "PMCID": "PMC123456",
-                    "DOI": "10.1000/xyz",
-                }
-            },
-        )
-    )
-    respx.get("https://api.semanticscholar.org/graph/v1/paper/10.1000%2Fxyz").mock(
-        return_value=httpx.Response(
-            200,
-            json={
-                "externalIds": {
-                    "PMID": "123456",
-                    "PMCID": "PMC123456",
-                    "DOI": "10.1000/xyz",
-                }
-            },
-        )
-    )
+    input_path.write_text("32256646\nPMC7086438\n")
 
     runner = CliRunner()
     result = runner.invoke(app, ["resolve", "ids", str(input_path)])
@@ -86,7 +32,7 @@ def test_cli_resolve_ids_writes_outputs(monkeypatch: pytest.MonkeyPatch, tmp_pat
     assert result.exit_code == 0, result.stdout
     assert "Resolved 2 identifiers into 1 records" in result.stdout
 
-    normalized = [normalize_identifier("123456"), normalize_identifier("PMC123456")]
+    normalized = [normalize_identifier("32256646"), normalize_identifier("PMC7086438")]
     identifier_hash = hash_identifiers([item.hash_component for item in normalized])
 
     run_dir = tmp_path / "interim" / "resolved" / identifier_hash
@@ -98,7 +44,11 @@ def test_cli_resolve_ids_writes_outputs(monkeypatch: pytest.MonkeyPatch, tmp_pat
 
     records = [json.loads(line) for line in records_path.read_text().splitlines() if line]
     assert records == [
-        {"pmid": "123456", "pmcid": "PMC123456", "doi": "10.1000/xyz"}
+        {
+            "pmid": "32256646",
+            "pmcid": "PMC7086438",
+            "doi": "10.1155/2020/4598217",
+        }
     ]
 
     metadata = json.loads(metadata_path.read_text())

@@ -1,0 +1,132 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - api.semanticscholar.org
+    method: GET
+    uri: https://api.semanticscholar.org/graph/v1/paper/32256646?fields=title%2Cabstract%2Cauthors%2Cvenue%2Cjournal%2Cyear
+  response:
+    body:
+      string: '{"error":"Paper with id 32256646 not found"}
+
+        '
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '45'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 18 Sep 2025 18:39:21 GMT
+      Via:
+      - 1.1 223f95455b0bb3057583bfe63e0d5c7a.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - 8o55uEshFcbJU5SWIiH8_Ym5l9jJUUIcJge61QHKTVNRairLSQCPjw==
+      X-Amz-Cf-Pop:
+      - DFW57-P1
+      X-Cache:
+      - Error from cloudfront
+      x-amz-apigw-id:
+      - RHG6AGF1vHcEmqg=
+      x-amzn-Remapped-Connection:
+      - keep-alive
+      x-amzn-Remapped-Content-Length:
+      - '45'
+      x-amzn-Remapped-Date:
+      - Thu, 18 Sep 2025 18:39:21 GMT
+      x-amzn-Remapped-Server:
+      - gunicorn
+      x-amzn-RequestId:
+      - 25e38230-342c-48af-9b65-c50b7b725558
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - eutils.ncbi.nlm.nih.gov
+    method: GET
+    uri: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=32256646&retmode=json&tool=CurateNSPond
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAJSTTW/bMAyG/wqhs1fEbr6Wm9flsK3JAhQYBhQ9MBYTC5MlTx/pgmD/fZTtJM1t
+        PcV5xZd6KJInURNKcmJxEuHYklgI8rFp0B1FJg7kvLKGxdHdvfibCceHOqTgqKQXi2dxXxST6XQ8
+        FS/Z9bs/Z9tFyUQbtxJDuqAYFSMW6FaBFTrIcz7wNroqycuDkvAJPUl4sE2rqSEToNSBnMEAK5Ic
+        jTHU1iWWkzDYJN9TjeZX/cr5ntZDxFBb2QWzVunoOU0HyYVdrCuspYKyfKeNb3QNQvnjnb7NAb79
+        l4VfV6MPfbFXY1BBdy7YOOtbqoI6EDxoZVSFGp5ClEewO8DunP5EFtcxOMUPuYA1GguPZGFnHSwP
+        qCMGbncyPKqtkjaDpUs5rckAjYTvbo++AWXgi5EKDbfAwKsK9RCnCT4f/S6aznPX9dKFM2T7BrE6
+        I/orYntBNAMimESoB0K6IdQdIdAA2PHZC5/q+ZozH5355JUvDbjVsXkzk8r7mP6mecU98VSJ8eTj
+        vMhnIjXA7NPIE/9wP4xuolG/I3Utykd5kU9GRd5nSTuTz8b5h3Ex+5mG/Uaaz/uF6Hv+LL7yxBuu
+        u3RBVfxWL2nTKuskdzzERLGJ237c2XURi0nKg72p38eTUHKYJI5sOkuv8PU5F8xPSOfF/AcAAP//
+        jFU9b8IwEN37KyLm0tgE2pBOiKULUvdOjjHCrRMjJ2GoxH/vu9ghH4DULbHv+Xzn996RMImMPaSQ
+        w/i0j//cbd9Y+rpM0huEHuVY9RjszfU+i3rs+xi8t3oITXooZy+cr1YxPUvcvQCJ4Kir2sKbqNJh
+        K9AuBV7RVa6ewtcxZzHnEWMZY23qMeSsqzECyRgH6AFCSKlO9T3IInkAAYmd+p0CljFLI/Z6D3B9
+        tf8CEA0tqYcIfpsC7+KUUTDWKSoZtKsl4QHCKSUJ4Qv/ooYu86Zu/2cfooo2ONYJWRNlcS4A0jYl
+        JsRi/Tw7NMZ8e2oHvyNHp/Pmeevq8urqmDetgkUwd/IIVKYlSouySG03O1KRsbI1gFZyoE8W3WUK
+        qrIykEzqWgS1V05KW1IJBjTyJeXW/nQGhRDK2RT+G5+1n35edwAdleuuMFkOBfosoacz6uAJDlg2
+        RU4zllbEWWgjcqMOzhaNM361OxU7KiyhhJvbYq0/m67ep5VHAW6GJGS74/E6elsfcNBuMFEmQ/NM
+        JcnGkLuE7lwul6c/AAAA//8DACRyD80wCAAA
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - X-RateLimit-Limit,X-RateLimit-Remaining
+      Cache-Control:
+      - private
+      Connection:
+      - Keep-Alive
+      Content-Security-Policy:
+      - upgrade-insecure-requests
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 18 Sep 2025 18:39:21 GMT
+      Keep-Alive:
+      - timeout=4, max=40
+      NCBI-PHID:
+      - 1D33174083AA2F95000053689361B75A.1.1.m_1
+      NCBI-SID:
+      - FCB70FC133FF9D4E_CA9DSID
+      Referrer-Policy:
+      - origin-when-cross-origin
+      Server:
+      - Finatra
+      Set-Cookie:
+      - ncbi_sid=FCB70FC133FF9D4E_CA9DSID; domain=.nih.gov; path=/; expires=Fri, 18
+        Sep 2026 18:39:21 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-RateLimit-Limit:
+      - '3'
+      X-RateLimit-Remaining:
+      - '2'
+      X-UA-Compatible:
+      - IE=Edge
+      X-XSS-Protection:
+      - 1; mode=block
+      content-encoding:
+      - gzip
+    status:
+      code: 200
+      message: OK
+version: 1

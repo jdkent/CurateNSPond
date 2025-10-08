@@ -6,10 +6,13 @@ import json
 import re
 import subprocess
 import tempfile
+import warnings
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Sequence
+
+from bs4 import BeautifulSoup
 
 from .services.entrez import EntrezSummaryClient
 from .services.semantic_scholar import SemanticScholarClient
@@ -62,36 +65,91 @@ class PubGetClient:
 
 
 class ACEClient:
-    """Wrapper around the ACE command-line interface for fetching HTML text."""
+    """Wrapper around the ACE Python API for fetching HTML full text."""
 
-    def __init__(self, *, executable: str = "ace") -> None:
-        self.executable = executable
+    def __init__(
+        self,
+        *,
+        executable: str | None = None,
+        scraper: Any | None = None,
+        metadata_fetcher: Any | None = None,
+        temp_dir: str | Path | None = None,
+        mode: str = "requests",
+        prefer_pmc_source: bool | str = True,
+    ) -> None:
+        if executable and executable != "ace":  # pragma: no cover - compatibility shim
+            warnings.warn(
+                "ACEClient no longer shells out to 'ace'; the 'executable' argument is ignored",
+                RuntimeWarning,
+                stacklevel=2,
+            )
+
+        ace_scrape = self._load_ace_module()
+
+        self._metadata_fetcher = metadata_fetcher or getattr(ace_scrape, "get_pubmed_metadata", None)
+        if self._metadata_fetcher is None:
+            raise RuntimeError("Invalid ACE installation: missing get_pubmed_metadata helper")
+
+        self._temp_manager: tempfile.TemporaryDirectory[str] | None = None
+        if scraper is not None:
+            self._scraper = scraper
+        else:
+            store_path = self._ensure_store_path(temp_dir)
+            self._scraper = ace_scrape.Scraper(store_path)
+
+        self._mode = mode
+        self._prefer_pmc_source = prefer_pmc_source
+
+    @staticmethod
+    def _load_ace_module() -> Any:
+        try:
+            import ace.scrape as ace_scrape
+        except ImportError as exc:  # pragma: no cover - depends on extra being installed
+            raise RuntimeError("ACE package not available; install the 'fulltext' extra") from exc
+        return ace_scrape
+
+    def _ensure_store_path(self, temp_dir: str | Path | None) -> str:
+        if temp_dir is not None:
+            return str(Path(temp_dir))
+        self._temp_manager = tempfile.TemporaryDirectory()
+        return self._temp_manager.name
 
     def fetch_text(self, pmid: str) -> str | None:
-        with tempfile.NamedTemporaryFile(suffix=".html") as tmp:
-            command = [
-                self.executable,
-                "fetch",
-                "--pmid",
+        journal = "unknown"
+        metadata: dict[str, Any] | None = None
+        try:
+            metadata = self._metadata_fetcher(pmid)
+        except Exception:  # pragma: no cover - defensive network call guard
+            metadata = None
+
+        if isinstance(metadata, dict):
+            journal_value = metadata.get("journal") or metadata.get("source")
+            if isinstance(journal_value, str) and journal_value.strip():
+                journal = journal_value
+
+        try:
+            html = self._scraper.get_html_by_pmid(
                 pmid,
-                "--output",
-                tmp.name,
-                "--mode",
-                "text",
-            ]
-            try:
-                result = subprocess.run(
-                    command,
-                    check=False,
-                    capture_output=True,
-                    text=True,
-                )
-            except FileNotFoundError as exc:  # pragma: no cover - depends on system
-                raise RuntimeError("ace executable not found; install the fulltext extra") from exc
-            if result.returncode != 0:
-                return None
-            text = Path(tmp.name).read_text(encoding="utf-8").strip()
-            return text or None
+                journal=journal,
+                mode=self._mode,
+                prefer_pmc_source=self._prefer_pmc_source,
+            )
+        except Exception as exc:  # pragma: no cover - relies on external service
+            raise RuntimeError(f"ACE scrape failed for PMID {pmid}") from exc
+
+        if not html:
+            return None
+
+        text = self._clean_html(html)
+        return text or None
+
+    @staticmethod
+    def _clean_html(html: str) -> str:
+        soup = BeautifulSoup(html, "html.parser")
+        raw_text = soup.get_text(separator="\n")
+        lines = [line.strip() for line in raw_text.splitlines()]
+        filtered = "\n".join(line for line in lines if line)
+        return filtered.strip()
 
 
 @dataclass(slots=True)

@@ -1,0 +1,52 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - eutils.ncbi.nlm.nih.gov
+    method: GET
+    uri: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/invalid.fcgi?db=pubmed&term=brain+imaging&retmode=json&retmax=1&retstart=0&tool=CurateNSPond
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKpWSi0qyi9SslLyzCtLzMlMUUgtLcnMUchLzE1VUM+EiKkr6SglFmTqZqdWAhUa
+        GpvpmRnpmZjrGZpYAGVKKgtSgcKZBUo6XErFJYklpcVAbn62Ui0AAAD//wMAS4nFN10AAAA=
+    headers:
+      Access-Control-Expose-Headers:
+      - X-RateLimit-Limit,X-RateLimit-Remaining
+      Connection:
+      - close
+      Content-Security-Policy:
+      - upgrade-insecure-requests
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 18 Sep 2025 18:39:41 GMT
+      Referrer-Policy:
+      - origin-when-cross-origin
+      Server:
+      - Finatra
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      X-RateLimit-Limit:
+      - '3'
+      X-RateLimit-Remaining:
+      - '3'
+      X-UA-Compatible:
+      - IE=Edge
+      X-XSS-Protection:
+      - 1; mode=block
+      content-encoding:
+      - gzip
+      content-length:
+      - '110'
+    status:
+      code: 400
+      message: Bad Request
+version: 1

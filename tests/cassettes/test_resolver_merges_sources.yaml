@@ -1,0 +1,372 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - www.ncbi.nlm.nih.gov
+    method: GET
+    uri: https://www.ncbi.nlm.nih.gov/pmc/utils/idconv/v1.0/?ids=PMC7086438&format=json&tool=CurateNSPond
+  response:
+    body:
+      string: '<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+
+        <html><head>
+
+        <title>301 Moved Permanently</title>
+
+        </head><body>
+
+        <h1>Moved Permanently</h1>
+
+        <p>The document has moved <a href="https://pmc.ncbi.nlm.nih.gov/tools/idconv/api/v1/articles/?ids=PMC7086438&amp;format=json&amp;tool=CurateNSPond">here</a>.</p>
+
+        </body></html>
+
+        '
+    headers:
+      Connection:
+      - Keep-Alive
+      Content-Length:
+      - '319'
+      Content-Security-Policy:
+      - upgrade-insecure-requests
+      Content-Type:
+      - text/html; charset=iso-8859-1
+      Date:
+      - Thu, 18 Sep 2025 18:46:09 GMT
+      Keep-Alive:
+      - timeout=1, max=10
+      Location:
+      - https://pmc.ncbi.nlm.nih.gov/tools/idconv/api/v1/articles/?ids=PMC7086438&format=json&tool=CurateNSPond
+      Referrer-Policy:
+      - origin-when-cross-origin
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+    status:
+      code: 301
+      message: Moved Permanently
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - pmc.ncbi.nlm.nih.gov
+    method: GET
+    uri: https://pmc.ncbi.nlm.nih.gov/tools/idconv/api/v1/articles/?ids=PMC7086438&format=json&tool=CurateNSPond
+  response:
+    body:
+      string: <!doctype html><meta charset="utf-8"><meta name=viewport content="width=device-width,
+        initial-scale=1"><title>403</title>403 Forbidden
+    headers:
+      Alt-Svc:
+      - clear
+      Content-Length:
+      - '134'
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Thu, 18 Sep 2025 18:46:10 GMT
+    status:
+      code: 403
+      message: Forbidden
+- request:
+    body: null
+    headers:
+      Connection:
+      - close
+      Host:
+      - www.ncbi.nlm.nih.gov
+    method: GET
+    uri: https://www.ncbi.nlm.nih.gov/pmc/utils/idconv/v1.0/?ids=PMC7086438&format=json&tool=CurateNSPond
+  response:
+    body:
+      string: '<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+
+        <html><head>
+
+        <title>301 Moved Permanently</title>
+
+        </head><body>
+
+        <h1>Moved Permanently</h1>
+
+        <p>The document has moved <a href="https://pmc.ncbi.nlm.nih.gov/tools/idconv/api/v1/articles/?ids=PMC7086438&amp;format=json&amp;tool=CurateNSPond">here</a>.</p>
+
+        </body></html>
+
+        '
+    headers:
+      Connection:
+      - close
+      Content-Length:
+      - '319'
+      Content-Security-Policy:
+      - upgrade-insecure-requests
+      Content-Type:
+      - text/html; charset=iso-8859-1
+      Date:
+      - Thu, 18 Sep 2025 18:46:10 GMT
+      Location:
+      - https://pmc.ncbi.nlm.nih.gov/tools/idconv/api/v1/articles/?ids=PMC7086438&format=json&tool=CurateNSPond
+      Referrer-Policy:
+      - origin-when-cross-origin
+      Server:
+      - Apache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+    status:
+      code: 301
+      message: Moved Permanently
+- request:
+    body: null
+    headers:
+      Connection:
+      - close
+      Host:
+      - pmc.ncbi.nlm.nih.gov
+    method: GET
+    uri: https://pmc.ncbi.nlm.nih.gov/tools/idconv/api/v1/articles/?ids=PMC7086438&format=json&tool=CurateNSPond
+  response:
+    body:
+      string: '{"status":"ok","response-date":"2025-09-18 14:46:10","request":{"warnings":["query
+        param `email` is missing."],"format":"json","ids":["PMC7086438"],"tool":"CurateNSPond","echo":"ids=PMC7086438&format=json&tool=CurateNSPond","versions":"no","showaiid":"no","idtype":"pmcid"},"records":[{"doi":"10.1155/2020/4598217","pmcid":"PMC7086438","pmid":32256646,"requested-id":"PMC7086438"}]}'
+    headers:
+      Alt-Svc:
+      - clear
+      Connection:
+      - close
+      Content-Length:
+      - '382'
+      Date:
+      - Thu, 18 Sep 2025 18:46:10 GMT
+      Server:
+      - istio-envoy
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Via:
+      - 1.1 google
+      X-UA-Compatible:
+      - IE=Edge
+      X-XSS-Protection:
+      - 1; mode=block
+      allow:
+      - GET, HEAD, OPTIONS
+      content-type:
+      - application/json
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      set-cookie:
+      - ncbi_sid=D6CC40438CC4EA63_1538SID; Domain=.nih.gov; expires=Fri, 18 Sep 2026
+        18:46:10 GMT; Max-Age=31536000; Path=/
+      vary:
+      - Accept,Accept-Encoding
+      x-content-type-options:
+      - nosniff
+      - nosniff
+      x-envoy-upstream-service-time:
+      - '7'
+      x-frame-options:
+      - DENY
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - eutils.ncbi.nlm.nih.gov
+    method: GET
+    uri: https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=32256646&retmode=json&tool=CurateNSPond
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAJSUyW7bMBCGX2XAsxOT8hr35KYBusSpgQBFgSAHWqQjohTpcnHqGn33DiXZkrMA
+        ycnWcL6Zn7NwTwrJhXRktidht5FkRqSPZcndjvTIVjqvrEEjPR+Qfz3i8FCH5ByV8GR2RwZZNhqP
+        h2Ny32v/1+eIHS09sokrwUNKkNGMokGeWmDBHTCGB95Glyfz1VYJ+Mi9FHBpy42WpTQB5jpIZ3iA
+        hRTozWMorEta9sTwMnG3BTe/ikeMd3vTeDR3m1fOaMt19BimEokXO6ILXggF8/k7MczoSg7zH+/k
+        llv49iYEq6u5D/VlWzCooCsKls76jcyD2kq41MqonGu4DVHswK6BV+fyT0TjTQxOYSFncMONhWtp
+        YW0dXG25jjxguxNwrVZK2B5cuRTTmh5wI+C7e+C+BGXgixGKG2yBgUcVisZPS/i08+toKua86qUL
+        B5GbjsT8ING3EjdHiaaRCCYp1I1CeaJQVwpBNgIrffaoT9X6yoM+edAnWn1pwK2OZWcmlfcxfaZ5
+        5Q8Sp4oMRxfTjE1IaoB5SCMv8Qf7YXQZjfodZdUiRlnGRjRjdZS0M2wyZGfDbPIzDfuJaTqtF6Lu
+        +R35ihNv8N5zF1SOtbpPm5ZbJ7DjISYVy7iqxx2pozEbpTi8hup93BMlmklCz7JCagumZ3hhLKHs
+        LmYaxhYp867/tPVfLi4ndDoeDqbPCHWSY9QyeHamxAxa9sMpLKzqooMWZfScsdGon9rSP3QgLUGh
+        fLD4NqWbdkuB5ZI4V0nK8U1hF31G+4wBpTNKq9SnyFb5UwKTUYbQKwTPc7kJLyHZ4BUEh9jJv0+B
+        YZ9OgY5fAo5deyuA3rhL8lWCPU+BfXFSS3xYn1KDTrmqIVzj4pg8LcIdfvOAe7mKofomn7mHOYZ1
+        PA9pZDEuArmN/wEAAP//bFVBEoIwDLz7CsazXrzJzfHsI9pMGaqFOpVy4+9umiCC3jqhJNl0s9vD
+        IU7nw77JIdyF2qp3rOic72iLqtNH1eE3ZYONijtrBJB5ArSqrtz1cuMtCpGKAJSVA33q6i9TgCqS
+        koz8YHTbX4ko9gwhgEYCycb4mAUKV7hm7uSM4yDuJ3uHn1qX5hY2YQUoVXSme57gEwrY586yx3LE
+        jMYHY4NrUuxyChKds+KL0xAg/HSL2JKbW1/KUmvATS3Csru219XbyoXGpy9H2ZjmyJAoB1YXnc40
+        Tbs3AAAA//8DACRyD80wCAAA
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - X-RateLimit-Limit,X-RateLimit-Remaining
+      Cache-Control:
+      - private
+      Connection:
+      - Keep-Alive
+      Content-Security-Policy:
+      - upgrade-insecure-requests
+      Content-Type:
+      - application/json; charset=UTF-8
+      Date:
+      - Thu, 18 Sep 2025 18:46:10 GMT
+      Keep-Alive:
+      - timeout=4, max=40
+      NCBI-PHID:
+      - 1D33174083AA2F950000446B68E43BA8.1.1.m_1
+      NCBI-SID:
+      - 441E56E715CEA4E6_836DSID
+      Referrer-Policy:
+      - origin-when-cross-origin
+      Server:
+      - Finatra
+      Set-Cookie:
+      - ncbi_sid=441E56E715CEA4E6_836DSID; domain=.nih.gov; path=/; expires=Fri, 18
+        Sep 2026 18:46:10 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-RateLimit-Limit:
+      - '3'
+      X-RateLimit-Remaining:
+      - '2'
+      X-UA-Compatible:
+      - IE=Edge
+      X-XSS-Protection:
+      - 1; mode=block
+      content-encoding:
+      - gzip
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - api.semanticscholar.org
+    method: GET
+    uri: https://api.semanticscholar.org/graph/v1/paper/10.1155%2F2020%2F4598217?fields=externalIds
+  response:
+    body:
+      string: '{"paperId": "6b887ed1ca6b40c5c4a1da8774f19bccbfb8321a", "externalIds":
+        {"PubMedCentral": "7086438", "MAG": "3012411403", "DOI": "10.1155/2020/4598217",
+        "CorpusId": 214933504, "PubMed": "32256646"}}
+
+        '
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '198'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 18 Sep 2025 18:46:11 GMT
+      Via:
+      - 1.1 c7697b9c4955dc41900ab918dddd33e0.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - btkNcwlKzsKft4b6qvlz-6QJ8JSN9NYl43SixY0Uh9xbFFFWTxDoow==
+      X-Amz-Cf-Pop:
+      - DFW57-P1
+      X-Cache:
+      - Miss from cloudfront
+      x-amz-apigw-id:
+      - RHH6AEGCvHcEHTw=
+      x-amzn-Remapped-Connection:
+      - keep-alive
+      x-amzn-Remapped-Content-Length:
+      - '198'
+      x-amzn-Remapped-Date:
+      - Thu, 18 Sep 2025 18:46:11 GMT
+      x-amzn-Remapped-Server:
+      - gunicorn
+      x-amzn-RequestId:
+      - 64e393ce-1b3f-4d58-ba84-0910388c29b5
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - api.semanticscholar.org
+    method: GET
+    uri: https://api.semanticscholar.org/graph/v1/paper/32256646?fields=externalIds
+  response:
+    body:
+      string: '{"error":"Paper with id 32256646 not found"}
+
+        '
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '45'
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 18 Sep 2025 18:46:11 GMT
+      Via:
+      - 1.1 c7697b9c4955dc41900ab918dddd33e0.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - FZYr8cXAbQc3nW4BMYuasnTx2Tx5U389NqAZVzfCSoM7VrSRIAPb_g==
+      X-Amz-Cf-Pop:
+      - DFW57-P1
+      X-Cache:
+      - Error from cloudfront
+      x-amz-apigw-id:
+      - RHH6EH0yvHcEljA=
+      x-amzn-Remapped-Connection:
+      - keep-alive
+      x-amzn-Remapped-Content-Length:
+      - '45'
+      x-amzn-Remapped-Date:
+      - Thu, 18 Sep 2025 18:46:11 GMT
+      x-amzn-Remapped-Server:
+      - gunicorn
+      x-amzn-RequestId:
+      - 643fbec3-aecf-4b01-9c27-aec7a11feebb
+    status:
+      code: 404
+      message: Not Found
+version: 1

@@ -12,6 +12,7 @@ from .services.entrez import EntrezError, EntrezSummaryClient
 from .services.pmc import PMCError, PMCIdConverter
 from .services.semantic_scholar import SemanticScholarClient, SemanticScholarError
 
+_PMC_PREFIX = "PMC"
 
 class IdentifierKind(str, Enum):
     PMID = "pmid"
@@ -46,9 +47,6 @@ class ResolutionResult:
     sources_used: set[str]
     errors: list[str]
     started_at: datetime
-
-
-_PMC_PREFIX = "PMC"
 
 
 def normalize_pmid(value: str) -> str:

@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-import httpx
 import pytest
-import respx
 
 from curate_ns_pond.resolution import (
     IdentifierResolver,
@@ -10,6 +8,12 @@ from curate_ns_pond.resolution import (
     NormalizedIdentifier,
     ResolutionResult,
     normalize_identifier,
+)
+from curate_ns_pond.services.entrez import EntrezError, EntrezSummaryClient
+from curate_ns_pond.services.pmc import PMCError, PMCIdConverter
+from curate_ns_pond.services.semantic_scholar import (
+    SemanticScholarClient,
+    SemanticScholarError,
 )
 
 
@@ -37,109 +41,77 @@ def test_normalize_identifier_variants() -> None:
         normalize_identifier("not an id")
 
 
-@respx.mock
+@pytest.mark.vcr
 def test_resolver_merges_sources() -> None:
-    pmc_route = respx.get("https://www.ncbi.nlm.nih.gov/pmc/utils/idconv/v1.0/")
-
-    def pmc_handler(request: httpx.Request) -> httpx.Response:
-        assert request.url.params["ids"] == "PMC123456"
-        payload = {
-            "records": [
-                {
-                    "pmcid": "PMC123456",
-                    "pmid": "123456",
-                    "doi": "10.1000/xyz",
-                }
-            ]
-        }
-        return httpx.Response(200, json=payload)
-
-    pmc_route.mock(side_effect=pmc_handler)
-
-    entrez_route = respx.get("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi")
-
-    def entrez_handler(request: httpx.Request) -> httpx.Response:
-        assert request.url.params["id"] == "123456"
-        payload = {
-            "result": {
-                "uids": ["123456"],
-                "123456": {
-                    "articleids": [
-                        {"idtype": "pmid", "value": "123456"},
-                        {"idtype": "pmcid", "value": "PMC123456"},
-                        {"idtype": "doi", "value": "10.1000/xyz"},
-                    ]
-                },
-            }
-        }
-        return httpx.Response(200, json=payload)
-
-    entrez_route.mock(side_effect=entrez_handler)
-
-    s2_route = respx.get("https://api.semanticscholar.org/graph/v1/paper/123456")
-    s2_route.mock(
-        return_value=httpx.Response(
-            200,
-            json={
-                "externalIds": {
-                    "DOI": "10.1000/xyz",
-                    "PMCID": "PMC123456",
-                    "PMID": "123456",
-                }
-            },
-        )
-    )
-
-    doi_route = respx.get(
-        "https://api.semanticscholar.org/graph/v1/paper/10.1000%2Fxyz"
-    )
-    doi_route.mock(
-        return_value=httpx.Response(
-            200,
-            json={
-                "externalIds": {
-                    "DOI": "10.1000/xyz",
-                    "PMCID": "PMC123456",
-                    "PMID": "123456",
-                }
-            },
-        )
-    )
-
     with IdentifierResolver() as resolver:
         normalized = [
-            normalize_identifier("123456"),
-            normalize_identifier("PMC123456"),
-            normalize_identifier("10.1000/xyz"),
+            normalize_identifier("32256646"),
+            normalize_identifier("PMC7086438"),
+            normalize_identifier("10.1155/2020/4598217"),
         ]
         result = resolver.resolve(normalized)
 
     assert isinstance(result, ResolutionResult)
     assert len(result.records) == 1
     record = result.records[0]
-    assert record.pmid == "123456"
-    assert record.pmcid == "PMC123456"
-    assert record.doi == "10.1000/xyz"
+    assert record.pmid == "32256646"
+    assert record.pmcid == "PMC7086438"
+    assert record.doi == "10.1155/2020/4598217"
     assert result.sources_used == {"semantic-scholar", "pmc", "entrez"}
     assert result.errors == []
 
 
-@respx.mock
+@pytest.mark.vcr
 def test_resolver_records_errors() -> None:
-    respx.get("https://api.semanticscholar.org/graph/v1/paper/123456").mock(
-        return_value=httpx.Response(500)
-    )
-    respx.get("https://www.ncbi.nlm.nih.gov/pmc/utils/idconv/v1.0/").mock(
-        return_value=httpx.Response(200, json={"records": []})
-    )
-    respx.get("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi").mock(
-        return_value=httpx.Response(200, json={"result": {"uids": []}})
-    )
+    class ErrorSemanticScholarClient(SemanticScholarClient):
+        def fetch_external_ids(self, identifier: str) -> dict[str, str] | None:
+            assert self._client is not None
+            response = self._client.get("https://httpbin.org/status/500")
+            if response.status_code >= 400:
+                raise SemanticScholarError("semantic-scholar: forced failure")
+            return None
 
-    with IdentifierResolver() as resolver:
-        normalized = [normalize_identifier("123456")]
-        result = resolver.resolve(normalized)
+    class ErrorEntrezClient(EntrezSummaryClient):
+        def fetch_article_ids(self, pmids):  # type: ignore[override]
+            assert self._client is not None
+            response = self._client.get("https://httpbin.org/status/500")
+            if response.status_code >= 400:
+                raise EntrezError("entrez: forced failure")
+            return {}
 
-    assert len(result.records) == 1
-    assert result.records[0].pmid == "123456"
+    class ErrorPMCConverter(PMCIdConverter):
+        def convert(self, pmcids):  # type: ignore[override]
+            assert self._client is not None
+            response = self._client.get("https://httpbin.org/status/500")
+            if response.status_code >= 400:
+                raise PMCError("pmc: forced failure")
+            return {}
+
+    semantic = ErrorSemanticScholarClient()
+    entrez = ErrorEntrezClient()
+    pmc = ErrorPMCConverter()
+
+    try:
+        with IdentifierResolver(
+            semantic_scholar=semantic,
+            entrez=entrez,
+            pmc_converter=pmc,
+        ) as resolver:
+            normalized = [
+                normalize_identifier("32256646"),
+                normalize_identifier("PMC7086438"),
+            ]
+            result = resolver.resolve(normalized)
+    finally:
+        semantic.close()
+        entrez.close()
+        pmc.close()
+
+    assert len(result.records) == 2
+    pmid_record = next(record for record in result.records if record.pmid == "32256646")
+    pmcid_record = next(record for record in result.records if record.pmcid == "PMC7086438")
+    assert pmid_record.pmid == "32256646"
+    assert pmcid_record.pmcid == "PMC7086438"
     assert "semantic-scholar" in " ".join(result.errors)
+    assert "pmc" in " ".join(result.errors)
+    assert "entrez" in " ".join(result.errors)
